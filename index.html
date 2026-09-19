@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>বরমী অনলাইন শপ</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#172033}
+header{background:#0b7a4b;color:#fff;padding:18px 16px;position:sticky;top:0;z-index:5}
+.wrap{max-width:1000px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-size:24px;font-weight:800}.cart{background:#fff;color:#0b7a4b;border:0;border-radius:22px;padding:10px 15px;font-weight:700}
+.hero{background:#e6f6ee;padding:28px 16px}.hero h1{margin:0 0 8px;font-size:30px}.hero p{margin:0 0 16px;color:#3b4b43}
+.search{width:100%;padding:13px;border:1px solid #ccd7d1;border-radius:12px;font-size:16px}
+.cats{display:flex;gap:8px;overflow:auto;padding:15px 0}.cat{white-space:nowrap;border:1px solid #c9d8d0;background:#fff;border-radius:20px;padding:9px 13px}.cat.active{background:#0b7a4b;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding:16px 0 30px}.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0000000d}.pic{height:150px;background:#eef2f1;display:flex;align-items:center;justify-content:center;color:#83908a;font-size:48px}.body{padding:12px}.name{font-weight:700;min-height:42px}.price{font-weight:800;color:#0b7a4b;margin:8px 0}.add{width:100%;border:0;background:#0b7a4b;color:#fff;padding:10px;border-radius:9px;font-weight:700}.sold{background:#888}
+section{padding:0 16px}.panel{background:#fff;border-radius:15px;padding:16px;margin:15px 0}.panel h2{margin-top:0}input,select,textarea{width:100%;padding:11px;margin:6px 0 10px;border:1px solid #ccd4d0;border-radius:9px}textarea{min-height:80px}.btn{border:0;border-radius:9px;padding:11px 14px;background:#0b7a4b;color:#fff;font-weight:700}.btn.secondary{background:#e8efeb;color:#123}
+footer{background:#13251e;color:#d9e7e0;padding:25px 16px;text-align:center}.wa{display:inline-block;background:#25d366;color:#fff;text-decoration:none;padding:11px 15px;border-radius:10px;font-weight:700}
+#admin{display:none}.small{font-size:13px;color:#66736d}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:520px){.row{grid-template-columns:1fr}.brand{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="wrap top"><div class="brand">বরমী অনলাইন শপ</div><button class="cart" onclick="scrollToId('order')">🛒 কার্ট <span id="count">0</span></button></div></header>
+
+<div class="hero"><div class="wrap">
+<h1>নিত্য প্রয়োজনীয় পণ্য এখন অনলাইনে</h1>
+<p>পণ্য দেখুন, কার্টে যোগ করুন এবং অর্ডার পাঠান।</p>
+<input class="search" id="search" placeholder="পণ্যের নাম লিখে খুঁজুন..." oninput="render()">
+<div class="cats" id="cats"></div>
+</div></div>
+
+<section class="wrap"><div class="grid" id="products"></div>
+
+<div class="panel" id="order">
+<h2>অর্ডার করুন</h2>
+<div id="cartList" class="small">কার্ট খালি।</div>
+<div class="row"><div><label>নাম</label><input id="customer" placeholder="আপনার নাম"></div><div><label>মোবাইল</label><input id="phone" placeholder="01XXXXXXXXX"></div></div>
+<label>ঠিকানা</label><textarea id="address" placeholder="ডেলিভারি ঠিকানা"></textarea>
+<button class="btn" onclick="placeOrder()">WhatsApp-এ অর্ডার পাঠান</button>
+<p class="small">WhatsApp: 01742509934</p>
+</div>
+
+<div class="panel">
+<h2>অ্যাডমিন প্যানেল</h2>
+<p class="small">ডেমো/লোকাল প্যানেল — এই GitHub সংস্করণে তথ্য আপনার ফোনের ব্রাউজারেই সংরক্ষিত হবে।</p>
+<button class="btn secondary" onclick="adminLogin()">Admin Login</button>
+<div id="admin"></div>
+</div>
+</section>
+
+<footer><div>বরমী অনলাইন শপ</div><div class="small">ঔষধ • LPG গ্যাস • চাল ও ডাল • মুদি পণ্য • অন্যান্য</div><br><a class="wa" href="https://wa.me/8801742509934" target="_blank">WhatsApp: 01742509934</a></footer>
+
+<script>
+const defaultProducts=[
+{id:1,name:"চাল",cat:"চাল ও ডাল",price:70,emoji:"🍚",stock:10},
+{id:2,name:"ডাল",cat:"চাল ও ডাল",price:120,emoji:"🫘",stock:10},
+{id:3,name:"মুদি পণ্য",cat:"মুদি পণ্য",price:100,emoji:"🛒",stock:10},
+{id:4,name:"LPG গ্যাস",cat:"LPG গ্যাস",price:0,emoji:"🛢️",stock:5},
+{id:5,name:"ঔষধ",cat:"ঔষধ",price:0,emoji:"💊",stock:10}
+];
+let products=JSON.parse(localStorage.getItem("bos_products")||"null")||defaultProducts;
+let cart=[]; let selectedCat="সব";
+const cats=["সব","ঔষধ","LPG গ্যাস","চাল ও ডাল","মুদি পণ্য","অন্যান্য"];
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function renderCats(){document.getElementById("cats").innerHTML=cats.map(c=>`<button class="cat ${selectedCat===c?'active':''}" onclick="selectedCat='${c}';render()">${c}</button>`).join("")}
+function render(){
+ renderCats(); const q=document.getElementById("search").value.toLowerCase();
+ const list=products.filter(p=>(selectedCat==="সব"||p.cat===selectedCat)&&p.name.toLowerCase().includes(q));
+ document.getElementById("products").innerHTML=list.map(p=>`<div class="card"><div class="pic">${p.emoji||"📦"}</div><div class="body"><div class="name">${p.name}</div><div class="small">${p.cat}</div><div class="price">${p.price?("৳"+p.price):"দাম জানতে যোগাযোগ করুন"}</div><button class="add ${p.stock<=0?'sold':''}" ${p.stock<=0?'disabled':''} onclick="add(${p.id})">${p.stock<=0?'SOLD OUT':'কার্টে যোগ করুন'}</button></div></div>`).join("")||"<p>কোনো পণ্য পাওয়া যায়নি।</p>";
+ updateCart();
+}
+function add(id){const p=products.find(x=>x.id===id); if(!p||p.stock<=0)return; const x=cart.find(x=>x.id===id); if(x)x.qty++;else cart.push({id,qty:1});updateCart()}
+function updateCart(){
+ document.getElementById("count").textContent=cart.reduce((s,x)=>s+x.qty,0);
+ document.getElementById("cartList").innerHTML=cart.length?cart.map(x=>{let p=products.find(p=>p.id===x.id);return `<div style="padding:7px 0;border-bottom:1px solid #eee">${p.name} × ${x.qty} <button onclick="cart=cart.filter(c=>c.id!==${x.id});updateCart()">✕</button></div>`}).join(""):"কার্ট খালি।";
+}
+function placeOrder(){
+ if(!cart.length)return alert("আগে পণ্য কার্টে যোগ করুন।");
+ const n=document.getElementById("customer").value.trim(),ph=document.getElementById("phone").value.trim(),a=document.getElementById("address").value.trim();
+ if(!n||!ph||!a)return alert("নাম, মোবাইল ও ঠিকানা পূরণ করুন।");
+ let lines=cart.map(x=>{let p=products.find(p=>p.id===x.id);return `• ${p.name} × ${x.qty}`}).join("\\n");
+ let msg=`বরমী অনলাইন শপে নতুন অর্ডার\\n\\nনাম: ${n}\\nমোবাইল: ${ph}\\nঠিকানা: ${a}\\n\\nপণ্য:\\n${lines}`;
+ location.href="https://wa.me/8801742509934?text="+encodeURIComponent(msg);
+}
+function adminLogin(){
+ const pw=prompt("Admin Password লিখুন:");
+ if(pw!=="admin123")return alert("ভুল Password");
+ const el=document.getElementById("admin");el.style.display="block";
+ el.innerHTML=`<hr><h3>পণ্য যোগ করুন</h3><input id="pn" placeholder="পণ্যের নাম"><input id="pc" placeholder="ক্যাটাগরি"><input id="pp" type="number" placeholder="দাম"><input id="ps" type="number" placeholder="স্টক"><button class="btn" onclick="addProduct()">পণ্য যোগ করুন</button><hr><h3>বর্তমান পণ্য</h3>${products.map(p=>`<div style="padding:8px 0;border-bottom:1px solid #eee">${p.name} — ৳${p.price||"যোগাযোগ"} — স্টক ${p.stock}</div>`).join("")}<p class="small">ডেমো পাসওয়ার্ড: admin123</p>`;
+}
+function addProduct(){
+ const name=document.getElementById("pn").value.trim(),cat=document.getElementById("pc").value.trim()||"অন্যান্য",price=Number(document.getElementById("pp").value)||0,stock=Number(document.getElementById("ps").value)||0;
+ if(!name)return alert("পণ্যের নাম দিন");
+ products.push({id:Date.now(),name,cat,price,stock,emoji:"📦"});localStorage.setItem("bos_products",JSON.stringify(products));alert("পণ্য যোগ হয়েছে");render();adminLogin();
+}
+render();
+</script>
+</body></html>
