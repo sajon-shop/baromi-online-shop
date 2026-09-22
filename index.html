@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>বরমী অনলাইন শপ</title>
 
 <style>
@@ -47,7 +48,8 @@ color:#0b7a4b;
 border:0;
 border-radius:22px;
 padding:10px 15px;
-font-weight:700
+font-weight:700;
+cursor:pointer
 }
 
 .hero{
@@ -85,7 +87,8 @@ white-space:nowrap;
 border:1px solid #c9d8d0;
 background:#fff;
 border-radius:20px;
-padding:9px 13px
+padding:9px 13px;
+cursor:pointer
 }
 
 .cat.active{
@@ -147,7 +150,8 @@ background:#0b7a4b;
 color:#fff;
 padding:10px;
 border-radius:9px;
-font-weight:700
+font-weight:700;
+cursor:pointer
 }
 
 .sold{
@@ -187,7 +191,8 @@ border-radius:9px;
 padding:11px 14px;
 background:#0b7a4b;
 color:#fff;
-font-weight:700
+font-weight:700;
+cursor:pointer
 }
 
 .btn.secondary{
@@ -233,11 +238,11 @@ border-bottom:1px solid #eee
 }
 
 .adminImg{
-width:80px;
-height:80px;
+width:90px;
+height:90px;
 object-fit:cover;
 border-radius:10px;
-margin:5px 0
+margin:7px 0
 }
 
 .editBtn{
@@ -246,7 +251,8 @@ color:#123;
 border:0;
 padding:7px 10px;
 border-radius:7px;
-margin-top:5px
+margin-top:5px;
+cursor:pointer
 }
 
 .deleteBtn{
@@ -255,7 +261,8 @@ color:#fff;
 border:0;
 padding:7px 10px;
 border-radius:7px;
-margin-top:5px
+margin-top:5px;
+cursor:pointer
 }
 
 .fileBox{
@@ -263,12 +270,12 @@ background:#f5f8f6;
 border:1px dashed #b8c9c0;
 padding:12px;
 border-radius:10px;
-margin-bottom:10px
+margin:10px 0
 }
 
 .preview{
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 object-fit:cover;
 border-radius:10px;
 margin:8px 0;
@@ -287,6 +294,17 @@ overflow:hidden
 width:0%;
 height:8px;
 background:#0b7a4b
+}
+
+.status{
+font-size:13px;
+margin:8px 0;
+color:#0b7a4b
+}
+
+.danger{
+background:#d93025;
+color:#fff
 }
 
 @media(max-width:520px){
@@ -325,6 +343,7 @@ height:160px
 
 
 <div class="hero">
+
 <div class="wrap">
 
 <h1>
@@ -344,19 +363,22 @@ oninput="render()">
 <div class="cats" id="cats"></div>
 
 </div>
+
 </div>
 
 
 <section class="wrap">
 
 <div class="grid" id="products">
+
 <p>পণ্য লোড হচ্ছে...</p>
+
 </div>
 
 
 <div class="panel" id="order">
 
-<h2>অর্ডার করুন</h2>
+<h2>🛒 অর্ডার করুন</h2>
 
 <div id="cartList" class="small">
 কার্ট খালি।
@@ -365,16 +387,27 @@ oninput="render()">
 <div class="row">
 
 <div>
+
 <label>নাম</label>
-<input id="customer" placeholder="আপনার নাম">
+
+<input
+id="customer"
+placeholder="আপনার নাম">
+
 </div>
 
 <div>
+
 <label>মোবাইল</label>
-<input id="phone" placeholder="01XXXXXXXXX">
+
+<input
+id="phone"
+placeholder="01XXXXXXXXX">
+
 </div>
 
 </div>
+
 
 <label>ঠিকানা</label>
 
@@ -383,8 +416,13 @@ id="address"
 placeholder="ডেলিভারি ঠিকানা">
 </textarea>
 
-<button class="btn" onclick="placeOrder()">
+
+<button
+class="btn"
+onclick="placeOrder()">
+
 WhatsApp-এ অর্ডার পাঠান
+
 </button>
 
 <p class="small">
@@ -396,14 +434,18 @@ WhatsApp: 01742509934
 
 <div class="panel">
 
-<h2>অ্যাডমিন প্যানেল</h2>
+<h2>🔐 অ্যাডমিন প্যানেল</h2>
 
 <p class="small">
-Firebase অনলাইন ডাটাবেস থেকে পণ্য পরিচালনা করা যাবে।
+Admin Login করে নতুন পণ্য ও ছবি যোগ করতে পারবেন।
 </p>
 
-<button class="btn secondary" onclick="adminLogin()">
+<button
+class="btn secondary"
+onclick="adminLogin()">
+
 Admin Login
+
 </button>
 
 <div id="admin"></div>
@@ -416,7 +458,7 @@ Admin Login
 <footer>
 
 <div>
-বরমী অনলাইন শপ
+<strong>বরমী অনলাইন শপ</strong>
 </div>
 
 <div class="small">
@@ -429,10 +471,13 @@ Admin Login
 class="wa"
 href="https://wa.me/8801742509934"
 target="_blank">
+
 WhatsApp: 01742509934
+
 </a>
 
 </footer>
+
 
 
 <!-- Firebase -->
@@ -450,263 +495,28 @@ WhatsApp: 01742509934
    FIREBASE CONFIG
 ========================= */
 
-const firebaseConfig =</title>
-
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7fb;color:#172033}
-header{background:#0b7a4b;color:#fff;padding:18px 16px;position:sticky;top:0;z-index:5}
-.wrap{max-width:1000px;margin:auto}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{font-size:24px;font-weight:800}
-.cart{background:#fff;color:#0b7a4b;border:0;border-radius:22px;padding:10px 15px;font-weight:700}
-
-.hero{background:#e6f6ee;padding:28px 16px}
-.hero h1{margin:0 0 8px;font-size:30px}
-.hero p{margin:0 0 16px;color:#3b4b43}
-.search{width:100%;padding:13px;border:1px solid #ccd7d1;border-radius:12px;font-size:16px}
-
-.cats{display:flex;gap:8px;overflow:auto;padding:15px 0}
-.cat{white-space:nowrap;border:1px solid #c9d8d0;background:#fff;border-radius:20px;padding:9px 13px}
-.cat.active{background:#0b7a4b;color:#fff}
-
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding:16px 0 30px}
-.card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 2px 10px #0000000d}
-.pic{height:150px;background:#eef2f1;display:flex;align-items:center;justify-content:center;color:#83908a;font-size:48px}
-.body{padding:12px}
-.name{font-weight:700;min-height:42px}
-.price{font-weight:800;color:#0b7a4b;margin:8px 0}
-.add{width:100%;border:0;background:#0b7a4b;color:#fff;padding:10px;border-radius:9px;font-weight:700}
-.sold{background:#888}
-
-section{padding:0 16px}
-.panel{background:#fff;border-radius:15px;padding:16px;margin:15px 0}
-.panel h2{margin-top:0}
-
-input,select,textarea{
-width:100%;
-padding:11px;
-margin:6px 0 10px;
-border:1px solid #ccd4d0;
-border-radius:9px
-}
-
-textarea{min-height:80px}
-
-.btn{
-border:0;
-border-radius:9px;
-padding:11px 14px;
-background:#0b7a4b;
-color:#fff;
-font-weight:700
-}
-
-.btn.secondary{background:#e8efeb;color:#123}
-
-footer{
-background:#13251e;
-color:#d9e7e0;
-padding:25px 16px;
-text-align:center
-}
-
-.wa{
-display:inline-block;
-background:#25d366;
-color:#fff;
-text-decoration:none;
-padding:11px 15px;
-border-radius:10px;
-font-weight:700
-}
-
-#admin{display:none}
-.small{font-size:13px;color:#66736d}
-
-.row{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px
-}
-
-.adminItem{
-padding:10px 0;
-border-bottom:1px solid #eee
-}
-
-.editBtn{
-background:#e8efeb;
-color:#123;
-border:0;
-padding:7px 10px;
-border-radius:7px;
-margin-top:5px
-}
-
-.deleteBtn{
-background:#d93025;
-color:#fff;
-border:0;
-padding:7px 10px;
-border-radius:7px;
-margin-top:5px
-}
-
-@media(max-width:520px){
-.row{grid-template-columns:1fr}
-.brand{font-size:20px}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<div class="wrap top">
-<div class="brand">বরমী অনলাইন শপ</div>
-
-<button class="cart" onclick="scrollToId('order')">
-🛒 কার্ট <span id="count">0</span>
-</button>
-
-</div>
-</header>
-
-
-<div class="hero">
-<div class="wrap">
-
-<h1>নিত্য প্রয়োজনীয় পণ্য এখন অনলাইনে</h1>
-
-<p>পণ্য দেখুন, কার্টে যোগ করুন এবং অর্ডার পাঠান।</p>
-
-<input
-class="search"
-id="search"
-placeholder="পণ্যের নাম লিখে খুঁজুন..."
-oninput="render()">
-
-<div class="cats" id="cats"></div>
-
-</div>
-</div>
-
-
-<section class="wrap">
-
-<div class="grid" id="products">
-<p>পণ্য লোড হচ্ছে...</p>
-</div>
-
-
-<div class="panel" id="order">
-
-<h2>অর্ডার করুন</h2>
-
-<div id="cartList" class="small">
-কার্ট খালি।
-</div>
-
-<div class="row">
-
-<div>
-<label>নাম</label>
-<input id="customer" placeholder="আপনার নাম">
-</div>
-
-<div>
-<label>মোবাইল</label>
-<input id="phone" placeholder="01XXXXXXXXX">
-</div>
-
-</div>
-
-<label>ঠিকানা</label>
-
-<textarea
-id="address"
-placeholder="ডেলিভারি ঠিকানা">
-</textarea>
-
-<button class="btn" onclick="placeOrder()">
-WhatsApp-এ অর্ডার পাঠান
-</button>
-
-<p class="small">
-WhatsApp: 01742509934
-</p>
-
-</div>
-
-
-<div class="panel">
-
-<h2>অ্যাডমিন প্যানেল</h2>
-
-<p class="small">
-Firebase অনলাইন ডাটাবেস থেকে পণ্য পরিচালনা করা যাবে।
-</p>
-
-<button class="btn secondary" onclick="adminLogin()">
-Admin Login
-</button>
-
-<div id="admin"></div>
-
-</div>
-
-</section>
-
-
-<footer>
-
-<div>বরমী অনলাইন শপ</div>
-
-<div class="small">
-ঔষধ • LPG গ্যাস • চাল ও ডাল • মুদি পণ্য • অন্যান্য
-</div>
-
-<br>
-
-<a
-class="wa"
-href="https://wa.me/8801742509934"
-target="_blank">
-WhatsApp: 01742509934
-</a>
-
-</footer>
-
-
-<!-- Firebase SDK -->
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-
-<script>
-
-/* =========================
-   YOUR FIREBASE CONFIG
-========================= */
-
 const firebaseConfig = {
 
-  apiKey: "AIzaSyD8SGB4Em6SLt9IeS1E1B1pPYxSz2e_LMk",
+apiKey:
+"AIzaSyD8SGB4Em6SLt9IeS1E1B1pPYxSz2e_LMk",
 
-  authDomain: "bormi-online-shop.firebaseapp.com",
+authDomain:
+"bormi-online-shop.firebaseapp.com",
 
-  projectId: "bormi-online-shop",
+projectId:
+"bormi-online-shop",
 
-  storageBucket: "bormi-online-shop.firebasestorage.app",
+storageBucket:
+"bormi-online-shop.firebasestorage.app",
 
-  messagingSenderId: "364698975623",
+messagingSenderId:
+"364698975623",
 
-  appId: "1:364698975623:web:01241605def9f53c9e6722",
+appId:
+"1:364698975623:web:01241605def9f53c9e6722",
 
-  measurementId: "G-HL8M79LR24"
+measurementId:
+"G-HL8M79LR24"
 
 };
 
@@ -715,7 +525,11 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.firestore();
+const db =
+firebase.firestore();
+
+const storage =
+firebase.storage();
 
 
 /* =========================
@@ -723,16 +537,23 @@ const db = firebase.firestore();
 ========================= */
 
 let products = [];
+
 let cart = [];
+
 let selectedCat = "সব";
 
+let selectedImageFile = null;
+
+
 const cats = [
+
 "সব",
 "ঔষধ",
 "LPG গ্যাস",
 "চাল ও ডাল",
 "মুদি পণ্য",
 "অন্যান্য"
+
 ];
 
 
@@ -747,7 +568,8 @@ name:"চাল",
 cat:"চাল ও ডাল",
 price:70,
 emoji:"🍚",
-stock:10
+stock:10,
+imageUrl:""
 },
 
 {
@@ -755,7 +577,8 @@ name:"ডাল",
 cat:"চাল ও ডাল",
 price:120,
 emoji:"🫘",
-stock:10
+stock:10,
+imageUrl:""
 },
 
 {
@@ -763,7 +586,8 @@ name:"মুদি পণ্য",
 cat:"মুদি পণ্য",
 price:100,
 emoji:"🛒",
-stock:10
+stock:10,
+imageUrl:""
 },
 
 {
@@ -771,7 +595,8 @@ name:"LPG গ্যাস",
 cat:"LPG গ্যাস",
 price:0,
 emoji:"🛢️",
-stock:5
+stock:5,
+imageUrl:""
 },
 
 {
@@ -779,7 +604,8 @@ name:"ঔষধ",
 cat:"ঔষধ",
 price:0,
 emoji:"💊",
-stock:10
+stock:10,
+imageUrl:""
 }
 
 ];
@@ -791,17 +617,22 @@ stock:10
 
 function scrollToId(id){
 
-document
-.getElementById(id)
-.scrollIntoView({
+const element =
+document.getElementById(id);
+
+if(element){
+
+element.scrollIntoView({
 behavior:"smooth"
 });
 
 }
 
+}
+
 
 /* =========================
-   LOAD FIREBASE PRODUCTS
+   LOAD PRODUCTS
 ========================= */
 
 async function loadProducts(){
@@ -809,34 +640,38 @@ async function loadProducts(){
 try{
 
 const snapshot =
-await db.collection("products").get();
+await db
+.collection("products")
+.get();
 
 products=[];
 
 snapshot.forEach(doc=>{
 
 products.push({
+
 id:doc.id,
 ...doc.data()
-});
 
 });
 
+});
 
-/* যদি Firebase collection খালি থাকে,
-তাহলে প্রথমবার default products যোগ হবে */
 
 if(products.length===0){
 
 for(const p of defaultProducts){
 
-await db.collection("products").add(p);
+await db
+.collection("products")
+.add(p);
 
 }
 
 return loadProducts();
 
 }
+
 
 render();
 
@@ -848,7 +683,7 @@ console.error(error);
 
 document.getElementById("products").innerHTML=
 
-"<p>পণ্য লোড হচ্ছে না। Firebase সংযোগ পরীক্ষা করুন।</p>";
+"<p>❌ পণ্য লোড হচ্ছে না। Firebase Rules পরীক্ষা করুন।</p>";
 
 }
 
@@ -866,7 +701,7 @@ document.getElementById("cats").innerHTML=
 cats.map(c=>`
 
 <button
-class="cat ${selectedCat===c?'active':''}"
+class="cat ${selectedCat===c ? "active" : ""}"
 onclick="selectCategory('${c}')">
 
 ${c}
@@ -888,12 +723,13 @@ render();
 
 
 /* =========================
-   RENDER
+   RENDER PRODUCTS
 ========================= */
 
 function render(){
 
 renderCats();
+
 
 const searchBox =
 document.getElementById("search");
@@ -901,34 +737,69 @@ document.getElementById("search");
 const q =
 searchBox
 ?
-searchBox.value.toLowerCase()
+searchBox.value
+.toLowerCase()
+.trim()
 :
 "";
 
 
 const list =
-products.filter(p=>
+products.filter(p=>{
 
-(selectedCat==="সব" || p.cat===selectedCat)
+const categoryOK =
+selectedCat==="সব"
+||
+p.cat===selectedCat;
 
-&&
-
+const searchOK =
 (p.name||"")
 .toLowerCase()
-.includes(q)
+.includes(q);
 
-);
+return categoryOK && searchOK;
+
+});
 
 
-document.getElementById("products").innerHTML=
+const box =
+document.getElementById("products");
+
+
+if(!list.length){
+
+box.innerHTML=
+"<p>কোনো পণ্য পাওয়া যায়নি।</p>";
+
+updateCart();
+
+return;
+
+}
+
+
+box.innerHTML=
 
 list.map(p=>`
 
 <div class="card">
 
 <div class="pic">
-${p.emoji||"📦"}
+
+${
+p.imageUrl
+?
+`
+<img
+src="${p.imageUrl}"
+alt="${p.name}">
+`
+:
+(p.emoji||"📦")
+}
+
 </div>
+
 
 <div class="body">
 
@@ -937,7 +808,7 @@ ${p.name}
 </div>
 
 <div class="small">
-${p.cat}
+${p.cat||"অন্যান্য"}
 </div>
 
 <div class="price">
@@ -945,16 +816,17 @@ ${p.cat}
 ${
 Number(p.price)>0
 ?
-"৳"+p.price
+"৳"+Number(p.price)
 :
 "দাম জানতে যোগাযোগ করুন"
 }
 
 </div>
 
+
 <button
-class="add ${Number(p.stock)<=0?'sold':''}"
-${Number(p.stock)<=0?'disabled':''}
+class="add ${Number(p.stock)<=0 ? "sold" : ""}"
+${Number(p.stock)<=0 ? "disabled" : ""}
 onclick="addToCart('${p.id}')">
 
 ${
@@ -971,11 +843,8 @@ Number(p.stock)<=0
 
 </div>
 
-`).join("")
+`).join("");
 
-||
-
-"<p>কোনো পণ্য পাওয়া যায়নি।</p>";
 
 updateCart();
 
@@ -983,7 +852,7 @@ updateCart();
 
 
 /* =========================
-   CART ADD
+   CART
 ========================= */
 
 function addToCart(id){
@@ -991,8 +860,16 @@ function addToCart(id){
 const p =
 products.find(x=>x.id===id);
 
-if(!p || Number(p.stock)<=0){
+if(!p){
 return;
+}
+
+if(Number(p.stock)<=0){
+
+alert("এই পণ্যটি বর্তমানে স্টকে নেই।");
+
+return;
+
 }
 
 
@@ -1008,49 +885,64 @@ existing.qty++;
 
 }else{
 
-alert("এই পণ্যের স্টকের বেশি নেওয়া যাবে না।");
+alert("স্টকের বেশি নেওয়া যাবে না।");
 
 }
 
 }else{
 
 cart.push({
+
 id:id,
 qty:1
+
 });
 
 }
+
 
 updateCart();
 
 }
 
 
-/* =========================
-   CART UPDATE
-========================= */
+function removeFromCart(id){
+
+cart =
+cart.filter(x=>x.id!==id);
+
+updateCart();
+
+}
+
 
 function updateCart(){
 
-document.getElementById("count").textContent=
-
+const count =
 cart.reduce(
 (sum,item)=>sum+item.qty,
 0
 );
 
 
+document.getElementById("count")
+.textContent=count;
+
+
+const box =
+document.getElementById("cartList");
+
+
 if(!cart.length){
 
-document.getElementById("cartList").innerHTML=
-"কার্ট খালি।";
+box.innerHTML="কার্ট খালি।";
 
 return;
 
 }
 
 
-document.getElementById("cartList").innerHTML=
+box.innerHTML=
 
 cart.map(item=>{
 
@@ -1067,6 +959,7 @@ border-bottom:1px solid #eee;
 ">
 
 <strong>${p.name}</strong>
+
 × ${item.qty}
 
 <button
@@ -1077,7 +970,7 @@ border:0;
 background:#eee;
 border-radius:6px;
 padding:4px 8px;
-">
+cursor:pointer">
 
 ✕
 
@@ -1088,16 +981,6 @@ padding:4px 8px;
 `;
 
 }).join("");
-
-}
-
-
-function removeFromCart(id){
-
-cart =
-cart.filter(x=>x.id!==id);
-
-updateCart();
 
 }
 
@@ -1117,23 +1000,28 @@ return;
 }
 
 
-const n =
+const name =
 document
 .getElementById("customer")
-.value.trim();
+.value
+.trim();
 
-const ph =
+
+const phone =
 document
 .getElementById("phone")
-.value.trim();
+.value
+.trim();
 
-const a =
+
+const address =
 document
 .getElementById("address")
-.value.trim();
+.value
+.trim();
 
 
-if(!n || !ph || !a){
+if(!name || !phone || !address){
 
 alert(
 "নাম, মোবাইল ও ঠিকানা পূরণ করুন।"
@@ -1155,23 +1043,23 @@ return `• ${p.name} × ${item.qty}`;
 }).join("\n");
 
 
-const msg =
+const message =
 
 `বরমী অনলাইন শপে নতুন অর্ডার
 
-নাম: ${n}
-মোবাইল: ${ph}
-ঠিকানা: ${a}
+নাম: ${name}
+মোবাইল: ${phone}
+ঠিকানা: ${address}
 
 পণ্য:
 ${lines}`;
 
 
-location.href=
+location.href =
 
 "https://wa.me/8801742509934?text="
 +
-encodeURIComponent(msg);
+encodeURIComponent(message);
 
 }
 
@@ -1188,11 +1076,12 @@ prompt("Admin Password লিখুন:");
 
 if(password!=="admin123"){
 
-alert("ভুল Password");
+alert("❌ ভুল Password");
 
 return;
 
 }
+
 
 showAdmin();
 
@@ -1200,7 +1089,7 @@ showAdmin();
 
 
 /* =========================
-   ADMIN PANEL
+   SHOW ADMIN
 ========================= */
 
 function showAdmin(){
@@ -1215,29 +1104,87 @@ el.innerHTML=`
 
 <hr>
 
-<h3>পণ্য যোগ করুন</h3>
+<h3>➕ নতুন পণ্য যোগ করুন</h3>
+
+
+<label>পণ্যের নাম</label>
 
 <input
 id="pn"
-placeholder="পণ্যের নাম">
+placeholder="যেমন: মিনিকেট চাল">
 
-<input
-id="pc"
-placeholder="ক্যাটাগরি">
+
+<label>ক্যাটাগরি</label>
+
+<select id="pc">
+
+<option>ঔষধ</option>
+<option>LPG গ্যাস</option>
+<option>চাল ও ডাল</option>
+<option>মুদি পণ্য</option>
+<option>অন্যান্য</option>
+
+</select>
+
+
+<label>দাম</label>
 
 <input
 id="pp"
 type="number"
 placeholder="দাম">
 
+
+<label>স্টক</label>
+
 <input
 id="ps"
 type="number"
-placeholder="স্টক">
+placeholder="কতটি আছে">
+
+
+<label>Emoji</label>
 
 <input
 id="pe"
-placeholder="Emoji যেমন 🍪">
+placeholder="যেমন 🍚">
+
+
+<div class="fileBox">
+
+<strong>📷 পণ্যের ছবি</strong>
+
+<input
+id="pimage"
+type="file"
+accept="image/*"
+onchange="previewImage(event)">
+
+
+<img
+id="imagePreview"
+class="preview">
+
+
+<div
+id="uploadStatus"
+class="status">
+</div>
+
+
+<div
+id="uploadProgress"
+class="progress">
+
+<div
+id="progressBar"
+class="progressBar">
+</div>
+
+</div>
+
+</div>
+
 
 <button
 class="btn"
@@ -1250,19 +1197,396 @@ onclick="addProduct()">
 
 <hr>
 
-<h3>বর্তমান পণ্য</h3>
+<h3>📦 বর্তমান পণ্য</h3>
 
 <div id="adminProducts">
 লোড হচ্ছে...
 </div>
 
-<p class="small">
-Admin Password: admin123
-</p>
+<br>
+
+<button
+class="btn danger"
+onclick="closeAdmin()">
+
+Admin বন্ধ করুন
+
+</button>
 
 `;
 
+
 renderAdminProducts();
+
+}
+
+
+/* =========================
+   CLOSE ADMIN
+========================= */
+
+function closeAdmin(){
+
+document.getElementById("admin").style.display="none";
+
+}
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+function previewImage(event){
+
+const file =
+event.target.files[0];
+
+
+selectedImageFile =
+file || null;
+
+
+const preview =
+document.getElementById("imagePreview");
+
+
+if(!file){
+
+preview.style.display="none";
+
+return;
+
+}
+
+
+if(!file.type.startsWith("image/")){
+
+alert("শুধু ছবি নির্বাচন করুন।");
+
+event.target.value="";
+
+selectedImageFile=null;
+
+preview.style.display="none";
+
+return;
+
+}
+
+
+if(file.size > 5*1024*1024){
+
+alert("ছবির সাইজ 5MB-এর কম হতে হবে।");
+
+event.target.value="";
+
+selectedImageFile=null;
+
+preview.style.display="none";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload=function(e){
+
+preview.src=e.target.result;
+
+preview.style.display="block";
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* =========================
+   UPLOAD IMAGE
+========================= */
+
+function uploadImage(file){
+
+return new Promise((resolve,reject)=>{
+
+if(!file){
+
+resolve("");
+
+return;
+
+}
+
+
+const fileName =
+
+Date.now()
++
+"_"
++
+file.name
+.replace(/[^a-zA-Z0-9._-]/g,"_");
+
+
+const storageRef =
+
+storage
+.ref()
+.child(
+"products/"
++
+fileName
+);
+
+
+const uploadTask =
+storageRef.put(file);
+
+
+const progress =
+document.getElementById(
+"uploadProgress"
+);
+
+
+const progressBar =
+document.getElementById(
+"progressBar"
+);
+
+
+const status =
+document.getElementById(
+"uploadStatus"
+);
+
+
+progress.style.display="block";
+
+status.textContent=
+"ছবি আপলোড হচ্ছে...";
+
+
+uploadTask.on(
+
+"state_changed",
+
+(snapshot)=>{
+
+const percent =
+
+(snapshot.bytesTransferred /
+snapshot.totalBytes)
+*
+100;
+
+
+progressBar.style.width =
+percent+"%";
+
+},
+
+(error)=>{
+
+console.error(error);
+
+status.textContent=
+"❌ ছবি আপলোড ব্যর্থ হয়েছে।";
+
+reject(error);
+
+},
+
+async()=>{
+
+try{
+
+const url =
+await uploadTask
+.snapshot
+.ref
+.getDownloadURL();
+
+
+progressBar.style.width="100%";
+
+status.textContent=
+"✅ ছবি আপলোড হয়েছে।";
+
+
+resolve(url);
+
+}
+
+catch(error){
+
+console.error(error);
+
+reject(error);
+
+}
+
+}
+
+);
+
+});
+
+}
+
+
+/* =========================
+   ADD PRODUCT
+========================= */
+
+async function addProduct(){
+
+const name =
+document
+.getElementById("pn")
+.value
+.trim();
+
+
+const cat =
+document
+.getElementById("pc")
+.value;
+
+
+const price =
+Number(
+document
+.getElementById("pp")
+.value
+) || 0;
+
+
+const stock =
+Number(
+document
+.getElementById("ps")
+.value
+) || 0;
+
+
+const emoji =
+document
+.getElementById("pe")
+.value
+.trim()
+||"📦";
+
+
+if(!name){
+
+alert("পণ্যের নাম দিন।");
+
+return;
+
+}
+
+
+try{
+
+let imageUrl="";
+
+
+/* ছবি থাকলে Storage-এ আপলোড */
+
+if(selectedImageFile){
+
+imageUrl =
+await uploadImage(
+selectedImageFile
+);
+
+}
+
+
+/* Firestore-এ Save */
+
+await db
+.collection("products")
+.add({
+
+name:name,
+
+cat:cat,
+
+price:price,
+
+stock:stock,
+
+emoji:emoji,
+
+imageUrl:imageUrl,
+
+createdAt:
+firebase.firestore
+.FieldValue
+.serverTimestamp()
+
+});
+
+
+alert(
+"✅ পণ্য সফলভাবে যোগ হয়েছে।"
+);
+
+
+/* Form পরিষ্কার */
+
+document.getElementById("pn").value="";
+
+document.getElementById("pp").value="";
+
+document.getElementById("ps").value="";
+
+document.getElementById("pe").value="";
+
+document.getElementById("pimage").value="";
+
+
+document.getElementById(
+"imagePreview"
+).style.display="none";
+
+
+document.getElementById(
+"uploadProgress"
+).style.display="none";
+
+
+document.getElementById(
+"uploadStatus"
+).textContent="";
+
+
+selectedImageFile=null;
+
+
+await loadProducts();
+
+showAdmin();
+
+}
+
+catch(error){
+
+console.error(error);
+
+alert(
+"❌ পণ্য যোগ করা যায়নি। Firebase Storage Rules এবং Firestore Rules পরীক্ষা করুন।"
+);
+
+}
 
 }
 
@@ -1274,7 +1598,10 @@ renderAdminProducts();
 function renderAdminProducts(){
 
 const box =
-document.getElementById("adminProducts");
+document.getElementById(
+"adminProducts"
+);
+
 
 if(!box)return;
 
@@ -1301,10 +1628,35 @@ ${p.name}
 
 <br>
 
+
+${
+p.imageUrl
+?
+`
+<img
+class="adminImg"
+src="${p.imageUrl}"
+alt="${p.name}">
+`
+:
+`
+<div class="small">
+ছবি নেই
+</div>
+`
+}
+
+
+<br>
+
 <span class="small">
 
+ক্যাটাগরি:
 ${p.cat}
-—
+
+<br>
+
+দাম:
 ${
 Number(p.price)>0
 ?
@@ -1312,12 +1664,16 @@ Number(p.price)>0
 :
 "যোগাযোগ"
 }
-—
-স্টক ${p.stock}
+
+<br>
+
+স্টক:
+${p.stock}
 
 </span>
 
 <br>
+
 
 <button
 class="editBtn"
@@ -1326,6 +1682,7 @@ onclick="editProduct('${p.id}')">
 ✏️ Edit
 
 </button>
+
 
 <button
 class="deleteBtn"
@@ -1343,83 +1700,6 @@ onclick="deleteProduct('${p.id}')">
 
 
 /* =========================
-   ADD PRODUCT
-========================= */
-
-async function addProduct(){
-
-const name =
-document
-.getElementById("pn")
-.value.trim();
-
-const cat =
-document
-.getElementById("pc")
-.value.trim()
-||"অন্যান্য";
-
-const price =
-Number(
-document.getElementById("pp").value
-)||0;
-
-const stock =
-Number(
-document.getElementById("ps").value
-)||0;
-
-const emoji =
-document
-.getElementById("pe")
-.value.trim()
-||"📦";
-
-
-if(!name){
-
-alert("পণ্যের নাম দিন");
-
-return;
-
-}
-
-
-try{
-
-await db.collection("products").add({
-
-name:name,
-cat:cat,
-price:price,
-stock:stock,
-emoji:emoji
-
-});
-
-
-alert("পণ্য যোগ হয়েছে।");
-
-await loadProducts();
-
-showAdmin();
-
-}
-
-catch(error){
-
-console.error(error);
-
-alert(
-"পণ্য যোগ করা যায়নি। Firebase Rules পরীক্ষা করুন।"
-);
-
-}
-
-}
-
-
-/* =========================
    EDIT PRODUCT
 ========================= */
 
@@ -1428,29 +1708,42 @@ async function editProduct(id){
 const p =
 products.find(x=>x.id===id);
 
+
 if(!p)return;
 
 
 const name =
-prompt("পণ্যের নাম:",p.name);
+prompt(
+"পণ্যের নাম:",
+p.name
+);
 
 if(name===null)return;
 
 
 const price =
-prompt("দাম:",p.price);
+prompt(
+"দাম:",
+p.price
+);
 
 if(price===null)return;
 
 
 const stock =
-prompt("স্টক:",p.stock);
+prompt(
+"স্টক:",
+p.stock
+);
 
 if(stock===null)return;
 
 
 const cat =
-prompt("ক্যাটাগরি:",p.cat);
+prompt(
+"ক্যাটাগরি:",
+p.cat
+);
 
 if(cat===null)return;
 
@@ -1463,14 +1756,20 @@ await db
 .update({
 
 name:name.trim(),
+
 price:Number(price)||0,
+
 stock:Number(stock)||0,
+
 cat:cat.trim()
 
 });
 
 
-alert("পণ্য আপডেট হয়েছে।");
+alert(
+"✅ পণ্য আপডেট হয়েছে।"
+);
+
 
 await loadProducts();
 
@@ -1483,7 +1782,7 @@ catch(error){
 console.error(error);
 
 alert(
-"পণ্য আপডেট করা যায়নি।"
+"❌ পণ্য আপডেট করা যায়নি।"
 );
 
 }
@@ -1499,6 +1798,7 @@ async function deleteProduct(id){
 
 const p =
 products.find(x=>x.id===id);
+
 
 if(!p)return;
 
@@ -1521,10 +1821,15 @@ await db
 
 
 cart =
-cart.filter(x=>x.id!==id);
+cart.filter(
+x=>x.id!==id
+);
 
 
-alert("পণ্য মুছে ফেলা হয়েছে।");
+alert(
+"✅ পণ্য মুছে ফেলা হয়েছে।"
+);
+
 
 await loadProducts();
 
@@ -1537,7 +1842,7 @@ catch(error){
 console.error(error);
 
 alert(
-"পণ্য মুছে ফেলা যায়নি।"
+"❌ পণ্য মুছে ফেলা যায়নি।"
 );
 
 }
@@ -1546,7 +1851,7 @@ alert(
 
 
 /* =========================
-   START WEBSITE
+   START
 ========================= */
 
 loadProducts();
